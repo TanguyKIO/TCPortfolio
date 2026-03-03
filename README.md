@@ -16,10 +16,10 @@ Beyond being a simple gallery, this project serves as a **technical laboratory**
 ### Backend (.NET 10)
 * **Framework:** ASP.NET Core 10 (Web API)
 * **Architecture:** Clean Architecture (Domain, Application, Infrastructure, API)
-* **ORM:** Entity Framework Core 9 (Code-First)
+* **ORM:** Entity Framework Core 10 (Code-First)
 * **Database:** PostgreSQL
 * **Mapping:** AutoMapper
-* **Documentation:** Scalar (OpenAPI 3.1)
+* **Documentation:** Scalar
 * **Security:** ASP.NET Core Identity + JWT
 
 ### Frontend (Angular)
