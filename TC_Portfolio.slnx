@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="TCPortfolio.API/TCPortfolio.API.csproj" />
+  <Project Path="TCPortfolio.Application/TCPortfolio.Application.csproj" />
+  <Project Path="TCPortfolio.Domain/TCPortfolio.Domain.csproj" />
+  <Project Path="TCPortfolio.Infrastructure/TCPortfolio.Infrastructure.csproj" />
+</Solution>
