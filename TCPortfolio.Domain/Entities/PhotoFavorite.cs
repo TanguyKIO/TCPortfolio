@@ -1,10 +1,12 @@
+using TCPortfolio.Domain.Common;
+
 namespace TCPortfolio.Domain.Entities;
 
 /// <summary>
 /// Represents a 'Favorite' save. 
 /// Used for the user's private collection/bookmarks.
 /// </summary>
-public class PhotoFavorite
+public class PhotoFavorite : IAuditable
 {
     // Composite Key: UserId + PhotoId
     public string UserId { get; set; } = string.Empty;

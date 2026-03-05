@@ -1,8 +1,8 @@
 using Scalar.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using TCPortfolio.Infrastructure.Persistence;
 using CloudinaryDotNet;
 using TCPortfolio.Infrastructure.Configurations;
+using TCPortfolio.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +30,9 @@ builder.Services.AddSingleton(new Cloudinary(account));
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        x => x.MigrationsAssembly("TCPortfolio.Infrastructure")));
 builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile));
 var app = builder.Build();
 
