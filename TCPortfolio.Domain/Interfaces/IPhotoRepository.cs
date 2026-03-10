@@ -7,10 +7,9 @@ namespace TCPortfolio.Domain.Interfaces;
 public interface IPhotoRepository
 {
     Task<Photo?> GetByIdAsync(Guid id, string lang);
-    Task<IEnumerable<Photo>> GetAllAsync();
-    Task<IEnumerable<Photo>> GetFilteredAsync(PhotoFilters filters, string lang);
+    Task<IEnumerable<Photo>> GetPhotosAsync(PhotoFilters filters, string lang);
     Task AddAsync(Photo photo);
-    void Update(Photo photo);
-    void Delete(Photo photo);
+    Task UpdateAsync(Photo photo);
+    Task DeleteAsync(Guid id);
     Task<bool> SaveChangesAsync();
 }

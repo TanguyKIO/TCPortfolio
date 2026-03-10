@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using CloudinaryDotNet;
 using TCPortfolio.Infrastructure.Configurations;
 using TCPortfolio.Infrastructure.Data;
+using TCPortfolio.Application.Interfaces;
+using TCPortfolio.Domain.Interfaces;
+using TCPortfolio.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +25,6 @@ var account = new Account(
     cloudinarySettings.ApiKey,
     cloudinarySettings.ApiSecret
 );
-
 // Inject the Cloudinary instance as a singleton service
 builder.Services.AddSingleton(new Cloudinary(account));
 
@@ -33,9 +35,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         x => x.MigrationsAssembly("TCPortfolio.Infrastructure")));
-builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile));
+builder.Services.AddAutoMapper(cfg => { }, typeof(PhotoMappingProfile));
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -44,6 +49,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.Run();
 
