@@ -72,10 +72,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         // --- Photo Configuration ---
         modelBuilder.Entity<Photo>(entity =>
         {
-            // Configure Value Objects (Owned Types)
-            entity.OwnsOne(p => p.Format);
-            entity.OwnsOne(p => p.File);
-
             // Many-to-Many relationship with Tags (EF Core 5+ handles the join table automatically)
             entity.HasMany(p => p.Tags)
                   .WithMany(t => t.Photos);

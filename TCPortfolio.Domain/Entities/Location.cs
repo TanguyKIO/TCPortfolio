@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using TCPortfolio.Domain.Common;
 
 namespace TCPortfolio.Domain.Entities;
@@ -10,6 +11,8 @@ public class Location : IAuditable, ILocalizable<LocationTranslation>
     public double? Longitude { get; set; }
     public double? Latitude { get; set; }
     public ICollection<LocationTranslation> Translations { get; set; } = [];
+    public Guid? CountryId { get; set; }
+    [ForeignKey("CountryId")]
     public virtual Country? Country { get; set; }
 }
 public class LocationTranslation : ITranslation

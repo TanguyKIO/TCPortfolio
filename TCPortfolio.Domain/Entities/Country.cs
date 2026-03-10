@@ -14,7 +14,7 @@ public class Country : IAuditable, ILocalizable<CountryTranslation>
 public class CountryTranslation : ITranslation
 {
     public Guid Id { get; set; }
-    public Guid CountryId { get; set; } // Clé étrangère
-    public string Lang { get; set; } = "en"; // "fr", "en", etc.
-    public string Name { get; set; } = string.Empty; // Le nom traduit
+    public Guid CountryId { get; set; } 
+    public string Lang { get; set; } = "en"; 
+    public string Name { get; set; } = string.Empty; 
 }

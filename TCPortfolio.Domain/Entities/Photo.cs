@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using TCPortfolio.Domain.Common;
 
 namespace TCPortfolio.Domain.Entities;
@@ -8,10 +9,18 @@ public class Photo : IAuditable, ILocalizable<PhotoTranslation>
 {
     public Guid Id { get; set; }
     public DateTime? DateTaken { get; set; }
+    public string MainUrl { get; set; } = string.Empty; // Cloudinary URL to the main photo (full size)
+    public string? PublicId { get; set; } // Cloudinary public ID
+    public int Width { get; set; }
+    public int Height { get; set; }    
+    public bool IsPortrait => Height > Width; // Not mapped to DB, calculated on the fly      
+    public double AspectRatio => Height != 0 ? (double)Width / Height : 0; // Not mapped to DB, calculated on the fly 
+    public Guid? LocationId { get; set; }
+    [ForeignKey("LocationId")]
     public virtual Location? Location { get; set; }
+    public Guid? TripId { get; set; }
+    [ForeignKey("TripId")]
     public virtual Trip? Trip { get; set; }
-    public PhotoFormat? Format { get; set; }
-    public PhotoFile? File { get; set; }
     public virtual ICollection<PhotoTag> Tags { get; set; } = [];
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? ModifiedAt { get; set; }    
